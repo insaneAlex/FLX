@@ -33,7 +33,7 @@ const data = [{
     }
 ]
 
-//  **1** +
+//  **1**
 const findTypes = (...args) => {
     const types = [];
     for (const el of args) {
@@ -44,7 +44,7 @@ const findTypes = (...args) => {
 findTypes('number');
 findTypes(null, 5, 'hello');
 
-// **2** +
+// **2**
 const executeForEach = (arr, foo) => {
     for (const el of arr) {
         foo(el);
@@ -54,7 +54,7 @@ executeForEach([1, 2, 3], function (el) {
     console.log(el)
 });
 
-// **3** +
+// **3**
 const mapArray = (arr, foo) => {
     const newArr = [];
     executeForEach(arr, (el) => {
@@ -66,7 +66,7 @@ mapArray([2, 5, 8], function (el) {
     return el + 3
 });
 
-// **4** +
+// **4**
 const filterArray = (arr, foo) => {
     const newArr = [];
     executeForEach(arr, (el) => {
@@ -80,7 +80,7 @@ filterArray([2, 5, 8], function (el) {
     return el > 3
 });
 
-// **5** +
+// **5**
 const getAmountOfAdultPeople = data => {
     let counter = 0;
     filterArray(data, (el) => {
@@ -92,7 +92,7 @@ const getAmountOfAdultPeople = data => {
 }
 getAmountOfAdultPeople(data);
 
-// **6** +
+// **6**
 const getGreenAdultBananaLovers = data => {
     const bananaLovers = [];
     const filtered = [];
@@ -108,7 +108,7 @@ const getGreenAdultBananaLovers = data => {
 }
 getGreenAdultBananaLovers(data);
 
-// **7** +
+// **7**
 const keys = obj => {
     const keys = []; //Object.keys(obj);
     for (let key in obj) {
@@ -122,7 +122,7 @@ keys({
     keyThree: 3
 });
 
-// **8** +
+// **8**
 const values = obj => {
     const values = []; //Object.values(obj)
     for (let key in obj) {
@@ -136,7 +136,7 @@ values({
     keyThree: 3
 });
 
-// **9** +
+// **9**
 const showFormattedDate = date => {
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     return `Date: ${date.getDate()} of ${months[date.getMonth()]}, ${date.getFullYear()}`
