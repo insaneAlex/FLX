@@ -54,7 +54,6 @@ executeForEach([1, 2, 3], function (el) {
     console.log(el)
 });
 
-
 // **3** +
 const mapArray = (arr, foo) => {
     const newArr = [];
@@ -66,7 +65,6 @@ const mapArray = (arr, foo) => {
 mapArray([2, 5, 8], function (el) {
     return el + 3
 });
-
 
 // **4** +
 const filterArray = (arr, foo) => {
@@ -82,7 +80,6 @@ filterArray([2, 5, 8], function (el) {
     return el > 3
 });
 
-
 // **5** +
 const getAmountOfAdultPeople = data => {
     let counter = 0;
@@ -94,7 +91,6 @@ const getAmountOfAdultPeople = data => {
     return counter;
 }
 getAmountOfAdultPeople(data);
-
 
 // **6** +
 const getGreenAdultBananaLovers = data => {
@@ -111,8 +107,6 @@ const getGreenAdultBananaLovers = data => {
     return bananaLovers;
 }
 getGreenAdultBananaLovers(data);
-
-
 
 // **7** +
 const keys = obj => {
@@ -142,7 +136,22 @@ values({
     keyThree: 3
 });
 
-// **9**
+// **9** +
+const showFormattedDate = date => {
+    const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    return `Date: ${date.getDate()} of ${months[date.getMonth()]}, ${date.getFullYear()}`
+}
+showFormattedDate(new Date('2019-01-27T01:10:00'));
 
 // **10**
+const isEvenYear = date => {
+    return !(date.getFullYear() % 2)
+}
+isEvenYear(new Date('2019-01-27T01:10:00'));
+
 // **11**
+const isEvenMonth = date => {
+    const num = date.getMonth() + 1;
+    return !(num % 2)
+}
+isEvenMonth(new Date('2019-02-27T01:10:00'));
