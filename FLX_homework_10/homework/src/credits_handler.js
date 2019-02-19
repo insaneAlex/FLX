@@ -9,11 +9,9 @@ const userCard = index => {
     }
 
     return {
-        getCardOptions: function () {
-            return options;
-        },
+        getCardOptions: () => options,
 
-        putCredits: function (amount) {
+        putCredits: amount => {
             if (amount > ZERO) {
                 options.balance = options.balance + amount;
                 options.historyLogs.push({
@@ -26,7 +24,7 @@ const userCard = index => {
             }
         },
 
-        takeCredits: function (amount) {
+        takeCredits: amount => {
             if (amount < options.balance && amount < options.transactionLimit) {
                 options.balance = options.balance - amount;
                 options.historyLogs.push({
@@ -41,7 +39,7 @@ const userCard = index => {
             }
         },
 
-        setTransactionLimit: function (amount) {
+        setTransactionLimit: amount => {
             options.transactionLimit = amount;
             options.historyLogs.push({
                 operationType: `Transaction limit changed`,
@@ -50,7 +48,7 @@ const userCard = index => {
             })
         },
 
-        transferCredits: function (amount, reciever) {
+        transferCredits: (amount, reciever) => {
             if (amount < options.balance && amount < options.transactionLimit) {
                 let amountWithFees = amount + amount * transferFee;
                 options.balance = options.balance - amountWithFees;
@@ -67,7 +65,6 @@ const userCard = index => {
             }
         }
     }
-
 }
 
 class UserAccount {
@@ -76,7 +73,6 @@ class UserAccount {
         this.cards = [];
         this.maxCardsAmount = 3;
     }
-
     addCard() {
         if (this.cards.length < this.maxCardsAmount) {
             this.cards.push(userCard(this.cards.length + 1));
@@ -84,7 +80,6 @@ class UserAccount {
             console.log('You already have maximum amount of cards.')
         }
     }
-
     getCardByKey(key) {
         if (this.cards[key - 1]) {
             return this.cards[key - 1];
