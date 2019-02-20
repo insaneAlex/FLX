@@ -1,2 +1,63 @@
-/* Your styles goes here */
+* {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
 
+#main-container {
+    margin: 0 auto;
+    margin-top: 50px;
+    width: 500px;
+    height: 500px;
+    border: 2px solid grey;
+    border-radius: 1%;
+}
+
+.header-title {
+    text-align: center;
+    font-size: 25px;
+    padding-top: 15px;
+}
+
+.addInput {
+    display: flex;
+    margin-top: 35px;
+    padding-left: 20px;
+    padding-right: 25px;
+    justify-content: space-around;
+}
+
+.header-input {
+    border: 2px solid gray;
+}
+
+.header-input {
+    width: 90%;
+    padding-left: 5px;
+}
+
+.header-line {
+    border-top: 2px solid gray;
+    margin: 15px 25px 0px 15px;
+}
+
+/* list  */
+.list {
+    margin: 0 auto;
+    width: 90%;
+    background-color: aliceblue;
+    height: 300px;
+}
+
+
+
+
+/* footer */
+.footer {
+    height: 75px;
+    text-align: center;
+}
+
+.cat-img {
+    height: 70px;
+}
