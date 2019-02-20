@@ -15,12 +15,12 @@ const userCard = index => {
             if (amount > ZERO) {
                 options.balance = options.balance + amount;
                 options.historyLogs.push({
-                    operationType: `Recieved credits`,
+                    operationType: 'Recieved credits',
                     credits: amount,
                     operationTime: new Date().toLocaleString('en-GB')
                 })
             } else {
-                console.log('You can\'t put on your balance amount less than zero.');
+                console.log(`You can't put on your balance amount less than zero.`);
             }
         },
 
@@ -28,7 +28,7 @@ const userCard = index => {
             if (amount < options.balance && amount < options.transactionLimit) {
                 options.balance = options.balance - amount;
                 options.historyLogs.push({
-                    operationType: `Withdrawal or credits`,
+                    operationType: 'Withdrawal or credits',
                     credits: amount,
                     operationTime: new Date().toLocaleString('en-GB')
                 })
@@ -42,7 +42,7 @@ const userCard = index => {
         setTransactionLimit: amount => {
             options.transactionLimit = amount;
             options.historyLogs.push({
-                operationType: `Transaction limit changed`,
+                operationType: 'Transaction limit changed',
                 credits: amount,
                 operationTime: new Date().toLocaleString('en-GB')
             })
