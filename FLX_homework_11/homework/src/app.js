@@ -1,68 +1,129 @@
 let rootNode = document.getElementById("root");
 
-
 //TODO LIST
 let mainContainer = document.createElement('section');
 mainContainer.setAttribute('id', 'main-container');
 
-//HEADER WRAPPER
+//HEADER block
 let header = document.createElement('header');
 
-let title = document.createElement('div');
-title.innerHTML = 'TODO Cat List';
-title.setAttribute('class', 'header-title');
+const headerEl = {
+    title: document.createElement('div'),
+    addInput: document.createElement('div'),
+    inputField: document.createElement('input'),
+    addBtn: document.createElement('i')
+}
 
-//INPUT FIELD + BTN
-let addInput = document.createElement('div');
-addInput.setAttribute('class', 'addInput');
+headerEl.title.innerHTML = 'TODO Cat List';
+headerEl.title.setAttribute('class', 'header-title');
 
-let inputField = document.createElement('input');
-inputField.setAttribute('id', 'input');
-inputField.setAttribute('class', 'header-input')
-inputField.setAttribute('placeholder', 'Add New Action');
+//INPUT FIELD + add button
+headerEl.addInput.setAttribute('class', 'addInput');
 
-let addBtn = document.createElement('i');
-addBtn.setAttribute('class', 'material-icons add-btn');
-addBtn.innerHTML = 'add_box';
-addBtn.addEventListener('click', function () {
+headerEl.inputField.setAttribute('id', 'input');
+headerEl.inputField.setAttribute('class', 'header-input')
+headerEl.inputField.setAttribute('placeholder', 'Add New Action');
+headerEl.inputField.autofocus = true;
+headerEl.inputField.addEventListener('input', () => {
+    if (!!document.getElementById('input').value > 0) {
+        btn.disabled = false;
+    } else {
+        btn.disabled = true;
+    }
+});
 
-    let text = document.getElementById('input').value;
-    alert(text);
-    let listItem = document.createElement('div');
 
+headerEl.addBtn.setAttribute('class', 'material-icons');
+headerEl.addBtn.innerHTML = 'add_box';
 
+let btn = document.createElement('button');
+btn.setAttribute('id', 'add-btn');
+btn.disabled = true;
 
+let amount = 0;
+btn.addEventListener('click', function () {
+    const elemObj = {
+        text: document.getElementById('input').value,
+        row: document.createElement('div'),
+        left: document.createElement('div'),
+        statusIco: document.createElement('i'),
+        itemText: document.createElement('p'),
+        right: document.createElement('div'),
+        delIco: document.createElement('i')
+    }
+
+    if (amount < 10) {
+        amount++;
+
+        elemObj.row.setAttribute('class', 'row');
+
+        elemObj.left.setAttribute('class', 'left');
+        elemObj.statusIco.setAttribute('class', 'material-icons status');
+        elemObj.statusIco.innerHTML = 'check_box_outline_blank';
+        elemObj.statusIco.addEventListener('click', () => {
+            if (elemObj.statusIco.innerHTML !== 'check_box') {
+                elemObj.statusIco.innerHTML = 'check_box';
+            }
+        })
+
+        elemObj.itemText.setAttribute('class', 'item-text')
+        elemObj.itemText.innerHTML = elemObj.text;
+        elemObj.left.appendChild(elemObj.statusIco);
+        elemObj.left.appendChild(elemObj.itemText);
+
+        elemObj.right.setAttribute('class', 'right');
+        elemObj.delIco.setAttribute('class', 'material-icons delIco');
+        elemObj.delIco.innerHTML = 'delete';
+        elemObj.delIco.addEventListener('click', () => {
+            elemObj.row.remove();
+            amount--;
+        })
+        elemObj.right.appendChild(elemObj.delIco);
+
+        elemObj.row.appendChild(elemObj.left);
+        elemObj.row.appendChild(elemObj.right);
+
+        document.getElementById('list').appendChild(elemObj.row);
+    } else if (amount > 9) {
+        headerEl.addBtn.disabled = true;
+    }
 })
+btn.appendChild(headerEl.addBtn);
 
-addInput.appendChild(inputField);
-addInput.appendChild(addBtn);
+headerEl.addInput.appendChild(headerEl.inputField);
+headerEl.addInput.appendChild(btn);
 //HR
 let hr = document.createElement('hr');
 hr.setAttribute('class', 'header-line');
 
 //
-header.appendChild(title);
-header.appendChild(addInput);
+header.appendChild(headerEl.title);
+header.appendChild(headerEl.addInput);
 header.appendChild(hr);
 //
 
 //MAIN WRAPPER
 let list = document.createElement('main');
-list.setAttribute('class', 'list');
-
-
-
-
-
+list.setAttribute('id', 'list');
 
 
 //FOOTER
-let footer = document.createElement('div');
+let footer = document.createElement('footer');
 footer.setAttribute('class', 'footer')
 let footerImg = document.createElement('img');
 footerImg.setAttribute('class', 'cat-img');
-footerImg.setAttribute('src', './assets/img/cat.png')
+footerImg.setAttribute('src', './assets/img/cat.png');
 
+footerImg.addEventListener('click', () => {
+    if (list.firstChild) {
+        let dec = confirm('Do you really want do delete all actions?');
+        if (dec) {
+            document.getElementById('list').innerHTML = null;
+            amount = 0;
+        }
+    }
+
+})
 footer.appendChild(footerImg);
 
 
