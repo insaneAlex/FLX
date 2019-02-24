@@ -1,4 +1,4 @@
-let rootNode = document.getElementById("root");
+let rootNode = document.getElementById('root');
 
 //TODO LIST
 let mainContainer = document.createElement('section');
@@ -6,10 +6,11 @@ mainContainer.setAttribute('id', 'main-container');
 
 //HEADER block
 let header = document.createElement('header');
-
+const TEN = 10;
+const ZERO = 0;
 const headerEl = {
     title: document.createElement('div'),
-    addInput: document.createElement('div'),
+    addAction: document.createElement('div'),
     inputField: document.createElement('input'),
     addBtn: document.createElement('i')
 }
@@ -18,14 +19,14 @@ headerEl.title.innerHTML = 'TODO Cat List';
 headerEl.title.setAttribute('class', 'header-title');
 
 //INPUT FIELD + add button
-headerEl.addInput.setAttribute('class', 'addInput');
+headerEl.addAction.setAttribute('class', 'addAction');
 
 headerEl.inputField.setAttribute('id', 'input');
 headerEl.inputField.setAttribute('class', 'header-input')
 headerEl.inputField.setAttribute('placeholder', 'Add New Action');
 headerEl.inputField.autofocus = true;
 headerEl.inputField.addEventListener('input', () => {
-    if (!!document.getElementById('input').value > 0) {
+    if (!!document.getElementById('input').value > ZERO) {
         btn.disabled = false;
     } else {
         btn.disabled = true;
@@ -39,7 +40,7 @@ let btn = document.createElement('button');
 btn.setAttribute('id', 'add-btn');
 btn.disabled = true;
 
-let amount = 0;
+let amount = ZERO;
 btn.addEventListener('click', function () {
     const elemObj = {
         text: document.getElementById('input').value,
@@ -52,6 +53,7 @@ btn.addEventListener('click', function () {
     }
     amount++;
     elemObj.row.setAttribute('class', 'row');
+    elemObj.row.setAttribute('draggable', 'true');
 
     elemObj.left.setAttribute('class', 'left');
     elemObj.statusIco.setAttribute('class', 'material-icons status');
@@ -74,8 +76,13 @@ btn.addEventListener('click', function () {
         elemObj.row.remove();
         amount--;
         btn.disabled = false;
-        if (!!document.querySelector('.error-message')) {
+
+        if (document.querySelector('.error-message')) {
             document.querySelector('.error-message').style.display = 'none';
+        }
+
+        if (headerEl.inputField.disabled) {
+            headerEl.inputField.disabled = false;
         }
     })
     elemObj.right.appendChild(elemObj.delIco);
@@ -85,31 +92,30 @@ btn.addEventListener('click', function () {
 
     document.getElementById('list').appendChild(elemObj.row);
 
-    if (amount === 10) {
+    if (amount === TEN) {
         btn.disabled = true;
-        if (!!document.querySelector('.error-message')) {
+        headerEl.inputField.disabled = true;
+        if (document.querySelector('.error-message')) {
             document.querySelector('.error-message').style.display = 'block';
         } else {
             let message = document.createElement('p');
             message.setAttribute('class', 'error-message');
-            message.innerHTML = 'Maximum item per list are create';
+            message.innerHTML = 'Maximum item per list are created';
             headerEl.title.appendChild(message);
         }
     }
 })
 btn.appendChild(headerEl.addBtn);
 
-headerEl.addInput.appendChild(headerEl.inputField);
-headerEl.addInput.appendChild(btn);
+headerEl.addAction.appendChild(headerEl.inputField);
+headerEl.addAction.appendChild(btn);
 //HR
 let hr = document.createElement('hr');
 hr.setAttribute('class', 'header-line');
 
-//
 header.appendChild(headerEl.title);
-header.appendChild(headerEl.addInput);
+header.appendChild(headerEl.addAction);
 header.appendChild(hr);
-//
 
 //MAIN WRAPPER
 let list = document.createElement('main');
@@ -122,16 +128,24 @@ let footerImg = document.createElement('img');
 footerImg.setAttribute('class', 'cat-img');
 footerImg.setAttribute('src', './assets/img/cat.png');
 
-//secret button :)
+
+//paw secret button :)
 footerImg.addEventListener('click', () => {
     if (list.firstChild) {
         let dec = confirm('Do you really want do delete all actions?');
         if (dec) {
             document.getElementById('list').innerHTML = null;
-            amount = 0;
+            amount = ZERO;
+            if (document.querySelector('.error-message')) {
+                document.querySelector('.error-message').style.display = 'none';
+            }
+            headerEl.inputField.disabled = false;
+            document.getElementById('input').value = '';
+            headerEl.addBtn.disabled = true;
         }
     }
 })
+
 footer.appendChild(footerImg);
 
 mainContainer.appendChild(header);
