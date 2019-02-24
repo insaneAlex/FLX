@@ -32,7 +32,6 @@ headerEl.inputField.addEventListener('input', () => {
     }
 });
 
-
 headerEl.addBtn.setAttribute('class', 'material-icons');
 headerEl.addBtn.innerHTML = 'add_box';
 
@@ -51,41 +50,51 @@ btn.addEventListener('click', function () {
         right: document.createElement('div'),
         delIco: document.createElement('i')
     }
+    amount++;
+    elemObj.row.setAttribute('class', 'row');
 
-    if (amount < 10) {
-        amount++;
+    elemObj.left.setAttribute('class', 'left');
+    elemObj.statusIco.setAttribute('class', 'material-icons status');
+    elemObj.statusIco.innerHTML = 'check_box_outline_blank';
+    elemObj.statusIco.addEventListener('click', () => {
+        if (elemObj.statusIco.innerHTML !== 'check_box') {
+            elemObj.statusIco.innerHTML = 'check_box';
+        }
+    })
 
-        elemObj.row.setAttribute('class', 'row');
+    elemObj.itemText.setAttribute('class', 'item-text')
+    elemObj.itemText.innerHTML = elemObj.text;
+    elemObj.left.appendChild(elemObj.statusIco);
+    elemObj.left.appendChild(elemObj.itemText);
 
-        elemObj.left.setAttribute('class', 'left');
-        elemObj.statusIco.setAttribute('class', 'material-icons status');
-        elemObj.statusIco.innerHTML = 'check_box_outline_blank';
-        elemObj.statusIco.addEventListener('click', () => {
-            if (elemObj.statusIco.innerHTML !== 'check_box') {
-                elemObj.statusIco.innerHTML = 'check_box';
-            }
-        })
+    elemObj.right.setAttribute('class', 'right');
+    elemObj.delIco.setAttribute('class', 'material-icons delIco');
+    elemObj.delIco.innerHTML = 'delete';
+    elemObj.delIco.addEventListener('click', () => {
+        elemObj.row.remove();
+        amount--;
+        btn.disabled = false;
+        if (!!document.querySelector('.error-message')) {
+            document.querySelector('.error-message').style.display = 'none';
+        }
+    })
+    elemObj.right.appendChild(elemObj.delIco);
 
-        elemObj.itemText.setAttribute('class', 'item-text')
-        elemObj.itemText.innerHTML = elemObj.text;
-        elemObj.left.appendChild(elemObj.statusIco);
-        elemObj.left.appendChild(elemObj.itemText);
+    elemObj.row.appendChild(elemObj.left);
+    elemObj.row.appendChild(elemObj.right);
 
-        elemObj.right.setAttribute('class', 'right');
-        elemObj.delIco.setAttribute('class', 'material-icons delIco');
-        elemObj.delIco.innerHTML = 'delete';
-        elemObj.delIco.addEventListener('click', () => {
-            elemObj.row.remove();
-            amount--;
-        })
-        elemObj.right.appendChild(elemObj.delIco);
+    document.getElementById('list').appendChild(elemObj.row);
 
-        elemObj.row.appendChild(elemObj.left);
-        elemObj.row.appendChild(elemObj.right);
-
-        document.getElementById('list').appendChild(elemObj.row);
-    } else if (amount > 9) {
-        headerEl.addBtn.disabled = true;
+    if (amount === 10) {
+        btn.disabled = true;
+        if (!!document.querySelector('.error-message')) {
+            document.querySelector('.error-message').style.display = 'block';
+        } else {
+            let message = document.createElement('p');
+            message.setAttribute('class', 'error-message');
+            message.innerHTML = 'Maximum item per list are create';
+            headerEl.title.appendChild(message);
+        }
     }
 })
 btn.appendChild(headerEl.addBtn);
@@ -106,7 +115,6 @@ header.appendChild(hr);
 let list = document.createElement('main');
 list.setAttribute('id', 'list');
 
-
 //FOOTER
 let footer = document.createElement('footer');
 footer.setAttribute('class', 'footer')
@@ -114,6 +122,7 @@ let footerImg = document.createElement('img');
 footerImg.setAttribute('class', 'cat-img');
 footerImg.setAttribute('src', './assets/img/cat.png');
 
+//secret button :)
 footerImg.addEventListener('click', () => {
     if (list.firstChild) {
         let dec = confirm('Do you really want do delete all actions?');
@@ -122,11 +131,8 @@ footerImg.addEventListener('click', () => {
             amount = 0;
         }
     }
-
 })
 footer.appendChild(footerImg);
-
-
 
 mainContainer.appendChild(header);
 mainContainer.appendChild(list);

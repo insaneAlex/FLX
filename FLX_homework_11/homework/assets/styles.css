@@ -17,6 +17,7 @@
     text-align: center;
     font-size: 30px;
     padding-top: 15px;
+    font-weight: 700;
 }
 
 .addInput {
@@ -35,8 +36,19 @@
     height: 29px;
 }
 
-.disabled {
-    color: gray;
+.error-message {
+    position: absolute;
+    font-weight: 100;
+    font-size: 15px;
+    animation: blinker 1.5s linear infinite;
+    right: 0;
+    left: 0;
+}
+
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
 }
 
 .header-line {
