@@ -81,6 +81,8 @@ mainContainer.appendChild(page1);
 
 function locationHashChanged() {
     if (location.hash === '') {
+        mainContainer.innerHTML = null;
+        mainContainer.appendChild(page1);
         mainCon();
     }
 }
