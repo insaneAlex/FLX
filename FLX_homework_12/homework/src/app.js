@@ -46,6 +46,7 @@ let addTask = () => {
         addPage.appendChild(headerText);
         addPage.appendChild(actionInput);
         addPage.appendChild(buttons);
+        mainContainer.replaceChild(addPage, page1);
     }
 }
 
@@ -57,7 +58,6 @@ function mainCon() {
         addTaskBtn: document.createElement('button'),
         message: document.createElement('p')
     }
-
     mainElem.TODOList.setAttribute('id', 'todo-page');
     mainElem.welcome.setAttribute('class', 'welcome');
     mainElem.welcome.innerHTML = 'Simple TODO aplication';
@@ -72,13 +72,12 @@ function mainCon() {
         mainElem.message.innerHTML = 'TODO is empty';
 
         mainElem.TODOList.appendChild(mainElem.message);
-    } 
+    }
     return mainElem.TODOList;
 }
 
 let page1 = mainCon();
 mainContainer.appendChild(page1);
-
 
 function locationHashChanged() {
     if (location.hash === '') {
@@ -87,6 +86,4 @@ function locationHashChanged() {
 }
 
 window.onhashchange = locationHashChanged;
-
-
 rootNode.appendChild(mainContainer);
