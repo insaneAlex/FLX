@@ -59,7 +59,52 @@ section#main {
     padding-left: 10px;
 }
 
+#list {
+    margin-top: 35px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+
 .message {
     margin-top: 50px;
     font-size: 30px;
+}
+
+.del,
+.check,
+.checked {
+    width: 35px;
+    height: 35px;
+    display: inline-block;
+}
+
+.check {
+    background-image: url('../assets/img/todo-s.png');
+}
+
+.checked {
+    background-image: url('../assets/img/done-s.png');
+}
+
+.del {
+    background-image: url('../assets/img/remove-s.jpg');
+}
+
+.desc {
+    width: 300px;
+    height: 35px;
+    display: inline-block;
+    font-size: 30px;
+}
+
+.checked-desc {
+    background-color: gray;
+}
+
+.row {
+    display: flex;
+    justify-content: stretch;
+    margin: 15px;
 }
